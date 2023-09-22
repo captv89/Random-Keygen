@@ -6,10 +6,12 @@ import (
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/logger"
+	"github.com/wailsapp/wails/v2/pkg/menu"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 	"github.com/wailsapp/wails/v2/pkg/options/mac"
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
+	"github.com/wailsapp/wails/v2/pkg/menu/keys"
 )
 
 //go:embed all:frontend/dist
@@ -22,32 +24,39 @@ func main() {
 	// Create an instance of the app structure
 	app := NewApp()
 
+	// App Menu
+	AppMenu := menu.NewMenu()
+	AppMenu.AddText("About", keys.CmdOrCtrl("o"), aboutPage)
+
+
+
+
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:             "Random Keygen",
-		Width:             1024,
-		Height:            768,
-		MinWidth:          1024,
-		MinHeight:         768,
-		MaxWidth:          1280,
-		MaxHeight:         800,
+		Width:             600,
+		Height:            450,
+		MinWidth:          550,
+		MinHeight:         400,
+		MaxWidth:          720,
+		MaxHeight:         550,
 		DisableResize:     false,
 		Fullscreen:        false,
 		Frameless:         false,
 		StartHidden:       false,
 		HideWindowOnClose: false,
 		BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
-		AssetServer:       &assetserver.Options{
+		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		Menu:              nil,
-		Logger:            nil,
-		LogLevel:          logger.DEBUG,
-		OnStartup:         app.startup,
-		OnDomReady:        app.domReady,
-		OnBeforeClose:     app.beforeClose,
-		OnShutdown:        app.shutdown,
-		WindowStartState:  options.Normal,
+		Menu:             AppMenu,
+		Logger:           nil,
+		LogLevel:         logger.DEBUG,
+		OnStartup:        app.startup,
+		OnDomReady:       app.domReady,
+		OnBeforeClose:    app.beforeClose,
+		OnShutdown:       app.shutdown,
+		WindowStartState: options.Normal,
 		Bind: []interface{}{
 			app,
 		},
@@ -58,7 +67,7 @@ func main() {
 			DisableWindowIcon:    false,
 			// DisableFramelessWindowDecorations: false,
 			WebviewUserDataPath: "",
-			ZoomFactor: 1.0,
+			ZoomFactor:          1.0,
 		},
 		// Mac platform specific options
 		Mac: &mac.Options{
@@ -80,8 +89,12 @@ func main() {
 			},
 		},
 	})
-
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+// aboutPage of *menu.CallbackData
+func aboutPage(_ *menu.CallbackData) {
+	log.Println("About Page")
 }

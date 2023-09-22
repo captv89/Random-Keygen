@@ -2,7 +2,10 @@ module changeme
 
 go 1.18
 
-require github.com/wailsapp/wails/v2 v2.6.0
+require (
+	github.com/tjarratt/babble v0.0.0-20210505082055-cbca2a4833c1
+	github.com/wailsapp/wails/v2 v2.6.0
+)
 
 require (
 	github.com/bep/debounce v1.2.1 // indirect
@@ -16,6 +19,8 @@ require (
 	github.com/leaanthony/slicer v1.6.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
+	github.com/onsi/ginkgo v1.16.5 // indirect
+	github.com/onsi/gomega v1.27.10 // indirect
 	github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
@@ -25,11 +30,11 @@ require (
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/wailsapp/go-webview2 v1.0.1 // indirect
 	github.com/wailsapp/mimetype v1.4.1 // indirect
-	golang.org/x/crypto v0.9.0 // indirect
+	golang.org/x/crypto v0.11.0 // indirect
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1 // indirect
-	golang.org/x/net v0.10.0 // indirect
-	golang.org/x/sys v0.8.0 // indirect
-	golang.org/x/text v0.9.0 // indirect
+	golang.org/x/net v0.12.0 // indirect
+	golang.org/x/sys v0.10.0 // indirect
+	golang.org/x/text v0.11.0 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.6.0 => /Users/Scorpion/go/pkg/mod
